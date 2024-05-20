@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { isRegister } from "../Service/AuthService.js";
 
 //import Quiz from "../Service/QuizClassComponent";
 
@@ -24,10 +25,9 @@ function HeaderComponent() {
   };
 
   const handleRegister = () => {
+    isRegister(true);
     navigate("/register");
   };
-
-  
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -113,15 +113,19 @@ function HeaderComponent() {
           >
             Login
           </button>
-
-          <button
-            type="button"
-            className="btn btn-info"
-            style={{ marginRight: "10px" }}
-            onClick={handleRegister}
-          >
-            Register
-          </button>
+          {isRegister ? (
+            <button
+              type="button"
+              className="btn btn-info"
+              id="registerbutton"
+              style={{ marginRight: "10px" }}
+              onClick={handleRegister}
+            >
+              Register
+            </button>
+          ) : (
+            <p>logged in</p>
+          )}
         </div>
       </nav>
 

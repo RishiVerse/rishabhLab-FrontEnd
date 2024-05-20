@@ -8,3 +8,7 @@ export const login = (usernameOrEmail, password) =>
   axios.post(LOGIN_BASE_REST_API_URL, { usernameOrEmail, password });
 
 export const register = (reg) => axios.post(ACCOUNT_BASE_REST_API_URL, reg);
+
+export const storeToken = (token) => localStorage.setItem("token", token);
+
+export const isRegister = (flag) => !flag;

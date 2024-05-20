@@ -1,4 +1,5 @@
 import "./App.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import HeaderComponent from "./Component/HeaderComponent";
@@ -9,6 +10,7 @@ import HomePage from "./Component/Homepage";
 import FooterComponent from "./Component/FooterComponent";
 import Login from "./Component/Login";
 import Register from "./Component/Register";
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,7 @@ function App() {
         <Route path="/spacescience" element={<SpaceScience />} />
         <Route path="/mathematics" element={<Mathematics />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

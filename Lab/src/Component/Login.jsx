@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { login, storeToken } from "../Service/AuthService.js";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    console.log(email + " " + pwd);
-  };
 
+    const log = { usernameOrEmail, password };
+
+    login(usernameOrEmail, password)
+      .then((response) => {
+        const token = window.btoa(`${usernameOrEmail}:${password}`);
+        storeToken(token);
+        setSuccess(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setSuccess(true);
+      });
+  }
   return (
     <>
       {success ? (
@@ -33,9 +45,9 @@ function Login() {
                   type="email"
                   className="form-control"
                   id="Email"
-                  value={email}
+                  value={usernameOrEmail}
                   required
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUsernameOrEmail(e.target.value)}
                 />
               </div>
               <div className="mb-3" style={{ paddingTop: "50px" }}>
@@ -44,9 +56,9 @@ function Login() {
                   type="password"
                   className="form-control"
                   id="Password"
-                  value={pwd}
+                  value={password}
                   required
-                  onChange={(e) => setPwd(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div style={{ paddingTop: "90px" }}>
