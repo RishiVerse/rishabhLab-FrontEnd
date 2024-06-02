@@ -1,10 +1,21 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { isRegister } from "../Service/AuthService.js";
-
-//import Quiz from "../Service/QuizClassComponent";
+import {
+  isUserLoggedIn,
+  getLoggedInUser,
+  logout,
+} from "../Service/AuthService.js";
 
 function HeaderComponent() {
   const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(isUserLoggedIn());
+  const [username, setUsername] = useState(getLoggedInUser());
+
+  useEffect(() => {
+    setLoggedIn(isUserLoggedIn());
+
+    setUsername(getLoggedInUser());
+  }, []);
 
   const handleSpaceScience = () => {
     document.getElementById("offcanvasExample").classList.remove("show");
@@ -15,6 +26,7 @@ function HeaderComponent() {
     document.getElementById("offcanvasExample").classList.remove("show");
     navigate("/mathematics");
   };
+
   const handlePhysics = () => {
     document.getElementById("offcanvasExample").classList.remove("show");
     navigate("/homepage");
@@ -25,9 +37,16 @@ function HeaderComponent() {
   };
 
   const handleRegister = () => {
-    isRegister(true);
     navigate("/register");
   };
+
+  const handleLogout = () => {
+    logout();
+    setLoggedIn(false);
+    setUsername(null);
+    navigate("/"); // Redirect to the home page or login page after logout
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -104,16 +123,31 @@ function HeaderComponent() {
             </button>
           </form>
         </div>
+
         <div style={{ paddingRight: "4px", display: "flex" }}>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            style={{ marginRight: "10px" }}
-            onClick={handleLogin}
-          >
-            Login
-          </button>
-          {isRegister ? (
+          {loggedIn ? (
+            <>
+              <span style={{ marginRight: "10px" }}>{username}</span>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ marginRight: "10px" }}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{ marginRight: "10px" }}
+              onClick={handleLogin}
+            >
+              Login
+            </button>
+          )}
+          {!loggedIn && (
             <button
               type="button"
               className="btn btn-info"
@@ -123,8 +157,6 @@ function HeaderComponent() {
             >
               Register
             </button>
-          ) : (
-            <p>logged in</p>
           )}
         </div>
       </nav>

@@ -82,9 +82,21 @@ function SpaceScience() {
             <p className="card-text">
               {lesson.description} - By - {lesson.instructor}
             </p>
-            <a href="#" className="btn btn-primary">
-              Go somewhere
-            </a>
+
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div
+                className="btn btn-primary"
+                style={{ padding: "10px", border: "1px solid #ccc" }}
+              >
+                Overview
+              </div>
+              <div
+                className="btn btn-primary"
+                style={{ padding: "10px", border: "1px solid #ccc" }}
+              >
+                Add to Cart
+              </div>
+            </div>
           </div>
         </div>
       ))}
