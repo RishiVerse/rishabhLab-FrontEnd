@@ -16,17 +16,16 @@ function App() {
   return (
     <BrowserRouter>
       <HeaderComponent />
-
       <Routes>
         <Route path="/spacescience" element={<SpaceScience />} />
         <Route path="/mathematics" element={<Mathematics />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/items" element={<Item />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/edit" element={<UserDetailComponent />} />
       </Routes>
-
       <FooterComponent />
     </BrowserRouter>
   );

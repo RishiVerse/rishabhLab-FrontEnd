@@ -18,7 +18,7 @@ function Login() {
     login(usernameOrEmail, password)
       .then((response) => {
         const token = window.btoa(`${usernameOrEmail}:${password}`);
-
+         
         storeToken(token);
         sessionStorage.setItem("LoggedIn", "true");
 
@@ -74,6 +74,7 @@ function Login() {
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {}
             </div>
             <div style={{ paddingTop: "90px" }}>
               <div className="mb-3 form-check">

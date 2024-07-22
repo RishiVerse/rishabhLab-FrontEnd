@@ -63,6 +63,10 @@ function SpaceScience() {
     },
   ];
 
+  const addToCart = (lesson, index) => {
+    console.log(lesson);
+  };
+
   return (
     <div className="lesson-container">
       {lessons.map((lesson, index) => (
@@ -93,6 +97,7 @@ function SpaceScience() {
               <div
                 className="btn btn-primary"
                 style={{ padding: "10px", border: "1px solid #ccc" }}
+                onClick={() => addToCart(lesson, index)}
               >
                 Add to Cart
               </div>
